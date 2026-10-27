@@ -1,3 +1,11 @@
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js?v=4', { scope: '/a/' }).catch((error) => {
+      console.warn('Proxy service worker registration failed:', error)
+    })
+  })
+}
+
 const form = document.getElementById('fs')
 const input = document.getElementById('is')
 

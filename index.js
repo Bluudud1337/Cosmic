@@ -20,6 +20,13 @@ if (config.challenge) {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+
+// Ultraviolet needs its service worker served from a URL that can control /a/.
+app.get('/sw.js', (req, res) => {
+  res.setHeader('Service-Worker-Allowed', '/a/')
+  res.sendFile(path.join(__dirname, 'static', 'm', 'sw.js'))
+})
+
 app.use(express.static(path.join(__dirname, 'static')))
 
 if (config.routes !== false) {
